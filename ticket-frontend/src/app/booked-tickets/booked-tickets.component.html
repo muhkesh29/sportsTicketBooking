@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card card-form" style="background-color: rgba(206, 224, 197, 0.835);">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Booked Tickets</h2>
+          <div *ngIf="!isOtpVerified">
+            <form (ngSubmit)="sendOtp()" class="mb-3">
+              <div class="mb-3">
+                <label for="gmail" class="form-label">Gmail</label>
+                <input type="email" class="form-control" id="gmail" [(ngModel)]="gmail" name="gmail" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+            </form>
+            <form *ngIf="otpSent" (ngSubmit)="verifyOtp()" class="mb-3">
+              <div class="mb-3">
+                <label for="otp" class="form-label">Enter OTP</label>
+                <input type="text" class="form-control" id="otp" [(ngModel)]="otp" name="otp" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="isOtpVerified">
+    <div class="col-12">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let ticket of tickets">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ ticket.sportName }}</h5>
+              <p class="card-text"><strong>Username:</strong> {{ ticket.username }}</p>
+              <p class="card-text"><strong>Phone:</strong> {{ ticket.phone }}</p>
+              <p class="card-text"><strong>Ticket Type:</strong> {{ ticket.ticketType }}</p>
+            </div>
+          </div>
+        </div>
+        <p *ngIf="tickets.length === 0" class="text-center">No tickets found for this Gmail.</p>
+      </div>
+    </div>
+  </div>
+</div>

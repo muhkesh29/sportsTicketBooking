@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Default body background */
+}
+
+.content {
+  background-color: #e8ede6; /* Main content background */
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  padding: 20px; /* Optional padding */
+  padding-top: 70px; /* Add padding to avoid content overlap with fixed navbar */
+}
+
+.navbar {
+  background-color: #f8f9fa; /* Default light background for navbar */
+}
+
+.navbar .nav-link.btn {
+  background-color: #75a15f; /* Default button background */
+  color: white; /* Default text color */
+  padding: 8px 16px; /* Button padding */
+  border-radius: 4px; /* Button rounded corners */
+  transition: background-color 0.3s; /* Smooth hover transition */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.navbar .nav-link.btn:hover {
+  background-color: #1e5503; /* Darker shade on hover */
+  color: white; /* Maintain text color on hover */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure equal card height for home and ticket cards */
+  border: 1px solid #ddd; /* Optional: Subtle border for ticket cards */
+  border-radius: 8px; /* Optional: Rounder corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow body to grow and push content */
+  padding: 15px; /* Adjusted padding for ticket cards */
+}
+
+/* Specific styles for the form card */
+.card-form {
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 8px; /* Rounder corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  background-color: rgba(117, 161, 95, 0.65); /* Match button color with opacity */
+}
+
+.card-form .card-body {
+  padding: 20px; /* Increased padding */
+}
+
+.card-form h2 {
+  margin-bottom: 1.5rem; /* Consistent spacing below heading */
+}
+
+/* Footer Styles */
+footer {
+  background-color: #f8f9fa; /* Light background for footer */
+  border-top: 1px solid #ddd; /* Subtle top border */
+  width: 100%; /* Ensure full width */
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.social-icons a {
+  color: #808080; /* Grayish color */
+  margin: 0 10px; /* Space between icons */
+  text-decoration: none; /* Remove underline */
+  transition: opacity 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+  display: inline-block; /* Ensure transform works */
+}
+
+.social-icons a:hover {
+  opacity: 1; /* Reduce opacity on hover */
+  transform: scale(1.2); /* Increase size by 20% on hover */
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #808080; /* Match icon color */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #666666; /* Slightly darker gray on hover */
+}
+.card-body .text-center .btn {
+  width: 40%; /* Half width */
+  border-radius: 35px;
+  display: inline-block; /* Ensure width is applied */
+}

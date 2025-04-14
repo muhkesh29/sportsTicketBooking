@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/logo.png" alt="Logo" width="50">
+    </a>
+    <div class="d-flex">
+      <a class="nav-link btn" [routerLink]="'/booked'">Booked Ticket</a>
+    </div>
+  </div>
+</nav>
+<div class="content" style="background-color: #e8ede6; min-height: 100vh; padding-top: 70px;">
+  <router-outlet></router-outlet>
+</div>

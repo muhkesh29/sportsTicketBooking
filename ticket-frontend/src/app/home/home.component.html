@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <h1 style="text-align: center; padding-bottom: 20px;">Book Your Spot Now</h1>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let sport of sports">
+      <div class="card h-100"> <!-- h-100 ensures equal height across cards -->
+        <img [src]="sport.image" class="card-img-top" [alt]="sport.name" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ sport.name }}</h5>
+          <p class="card-text flex-grow-1">{{ sport.description }}</p>
+          <div class="text-center"> <!-- Center the button -->
+            <a [routerLink]="['/book', sport.name]" class="btn btn-success mt-auto">Book Ticket</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer Section -->
+<footer class="w-100 text-center py-4 mt-5">
+  <p>Contact Us</p>
+  <div class="social-icons mb-2">
+    <a href="mailto:guptamukesh9380@gmail.com" target="_blank"><i class="fa-solid fa-envelope fa-2x"></i></a>
+    <a href="https://www.instagram.com/_mukesh__13__?igsh=MWI2aHVrcmxpdWQ0bg==" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+    <a href="https://www.linkedin.com/in/mukesh-gupta-05162a332?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
+  </div>
+  <p>© 2025 All rights reserved by management</p>
+</footer>
+

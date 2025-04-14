@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <h2 class="text-center">Book Ticket for {{ sport }}</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card card-form">
+        <div class="card-body">
+          <div *ngIf="!isOtpVerified">
+            <form (ngSubmit)="sendOtp()" class="mb-3">
+              <div class="mb-3">
+                <label for="gmail" class="form-label">Gmail</label>
+                <input type="email" class="form-control" id="gmail" [(ngModel)]="gmail" name="gmail" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+            </form>
+            <form *ngIf="otpSent" (ngSubmit)="verifyOtp()" class="mb-3">
+              <div class="mb-3">
+                <label for="otp" class="form-label">Enter OTP</label>
+                <input type="text" class="form-control" id="otp" [(ngModel)]="otp" name="otp" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
+            </form>
+          </div>
+          <form *ngIf="isOtpVerified" (ngSubmit)="bookTicket()">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" [(ngModel)]="ticket.username" name="username" required
+                     [class.is-invalid]="!isValidUsername(ticket.username) && ticket.username.length > 0">
+              <div *ngIf="!isValidUsername(ticket.username) && ticket.username.length > 0" class="invalid-feedback">
+                Username must contain only letters, spaces, and hyphens.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phone" [(ngModel)]="ticket.phone" name="phone" required
+                     [class.is-invalid]="!isValidPhone(ticket.phone) && ticket.phone.length > 0">
+              <div *ngIf="!isValidPhone(ticket.phone) && ticket.phone.length > 0" class="invalid-feedback">
+                Phone number must be exactly 10 digits.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="ticketType" class="form-label">Ticket Type</label>
+              <select class="form-select" id="ticketType" [(ngModel)]="ticket.ticketType" name="ticketType" (change)="checkVip()" required>
+                <option value="Regular">Regular</option>
+                <option value="VIP">VIP</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success w-100" [disabled]="!canBookTicket()">Book</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
