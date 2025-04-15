@@ -1,11 +1,9 @@
 # Ignore node_modules
 ticket-backend/node_modules/
-ticket-email-service/node_modules/
 ticket-frontend/node_modules/
 
 # Ignore build artifacts
 ticket-backend/target/
-ticket-email-service/target/
 ticket-frontend/dist/
 
 # Ignore IDE files

@@ -1,16 +1,32 @@
 package com.ticket.ticket_backend.model;
-import jakarta.persistence.*;
-import lombok.Data;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Data
 public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ticketId;
-    private String sportName;
+    private Integer ticketId; // Changed to Integer to match database integer type
     private String gmail;
     private String phone;
+    private String sportName;
+    private String ticketType;
     private String username;
-    private String ticketType; // "Regular" or "VIP"
+
+    // Default constructor
+    public Ticket() {}
+
+    // Getters and setters
+    public Integer getTicketId() { return ticketId; }
+    public void setTicketId(Integer ticketId) { this.ticketId = ticketId; }
+    public String getGmail() { return gmail; }
+    public void setGmail(String gmail) { this.gmail = gmail; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public String getSportName() { return sportName; }
+    public void setSportName(String sportName) { this.sportName = sportName; }
+    public String getTicketType() { return ticketType; }
+    public void setTicketType(String ticketType) { this.ticketType = ticketType; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 }

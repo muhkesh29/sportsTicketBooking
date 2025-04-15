@@ -30,22 +30,23 @@ export class BookTicketComponent implements OnInit {
   }
 
   sendOtp(): void {
+    console.log('Sending OTP for email:', this.gmail);
     this.apiService.sendOtp(this.gmail).subscribe({
-      next: () => {
+      next: (response) => {
         this.otpSent = true;
-        alert('OTP sent to your Gmail');
+        alert(response || 'OTP sent to your Gmail');
       },
-      error: () => alert('Failed to send OTP')
+      error: (error) => alert(error.error || 'Failed to send OTP')
     });
   }
 
   verifyOtp(): void {
     this.apiService.verifyOtp(this.gmail, this.otp).subscribe({
-      next: () => {
+      next: (response) => {
         this.isOtpVerified = true;
-        alert('OTP verified');
+        alert(response || 'OTP verified'); // Use response or fallback message
       },
-      error: () => alert('Invalid OTP')
+      error: (error) => alert(error.error || 'Invalid OTP')
     });
   }
 
@@ -86,11 +87,11 @@ export class BookTicketComponent implements OnInit {
 
     if (this.canBookTicket()) {
       this.apiService.bookTicket(this.ticket).subscribe({
-        next: () => {
-          alert('Ticket booked successfully!');
+        next: (response) => {
+          alert(response || 'Ticket booked successfully!');
           this.router.navigate(['/']);
         },
-        error: () => alert('Failed to book ticket')
+        error: (error) => alert(error.error || 'Failed to book ticket')
       });
     } else {
       alert('Please enter a valid 10-digit phone number and a valid username (letters, spaces, and hyphens only).');

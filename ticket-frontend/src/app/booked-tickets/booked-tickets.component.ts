@@ -9,38 +9,40 @@ import { Ticket } from '../models/ticket';
   styleUrls: ['./booked-tickets.component.css']
 })
 export class BookedTicketsComponent {
-  gmail = '';
-  otp = '';
-  otpSent = false;
-  isOtpVerified = false;
+  gmail: string = '';
+  otp: string = '';
+  otpSent: boolean = false;
+  isOtpVerified: boolean = false;
   tickets: Ticket[] = [];
 
   constructor(private apiService: ApiService) {}
 
   sendOtp(): void {
+    console.log('Sending OTP for email:', this.gmail);
     this.apiService.sendOtp(this.gmail).subscribe({
-      next: () => {
+      next: (response) => {
         this.otpSent = true;
-        alert('OTP sent to your Gmail');
+        alert(response || 'OTP sent to your Gmail');
       },
-      error: () => alert('Failed to send OTP')
+      error: (error) => alert(error.error || 'Failed to send OTP')
     });
   }
 
   verifyOtp(): void {
     this.apiService.verifyOtp(this.gmail, this.otp).subscribe({
-      next: () => {
+      next: (response) => {
         this.isOtpVerified = true;
         this.loadTickets();
+        alert(response || 'OTP verified'); // Use response or fallback message
       },
-      error: () => alert('Invalid OTP')
+      error: (error) => alert(error.error || 'Invalid OTP')
     });
   }
 
   loadTickets(): void {
     this.apiService.getBookedTickets(this.gmail).subscribe({
       next: (tickets) => (this.tickets = tickets),
-      error: () => alert('Failed to load tickets')
+      error: (error) => alert(error.error || 'Failed to load tickets')
     });
   }
 }

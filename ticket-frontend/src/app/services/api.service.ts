@@ -1,30 +1,41 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ticket } from '../models/ticket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private backendUrl = 'http://localhost:8080/api';
-  private emailServiceUrl = 'http://localhost:3000';
+  private baseUrl = 'http://localhost:8080/api/tickets';
 
   constructor(private http: HttpClient) {}
 
-  sendOtp(email: string): Observable<any> {
-    return this.http.post(`${this.emailServiceUrl}/send-otp`, { email });
+  // Send OTP (updated to use query param)
+  sendOtp(email: string): Observable<string> {
+    return this.http.post(`${this.baseUrl}/send-otp?email=${encodeURIComponent(email)}`, null, { responseType: 'text' });
   }
 
-  verifyOtp(email: string, otp: string): Observable<any> {
-    return this.http.post(`${this.emailServiceUrl}/verify-otp`, { email, otp });
+  // Verify OTP
+  verifyOtp(email: string, otp: string): Observable<string> {
+    return this.http.post(`${this.baseUrl}/verify-otp?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`, null, { responseType: 'text' });
   }
 
-  bookTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(`${this.backendUrl}/tickets/book`, ticket);
+  // Get booked tickets
+  getBookedTickets(email: string): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(`${this.baseUrl}/getBookedTickets?email=${encodeURIComponent(email)}`);
   }
 
-  getBookedTickets(gmail: string): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(`${this.backendUrl}/tickets/booked`, { params: { gmail } });
+  // Book ticket
+  bookTicket(ticket: Ticket): Observable<string> {
+    return this.http.post(`${this.baseUrl}/create?email=${encodeURIComponent(ticket.gmail)}`, ticket, { responseType: 'text' });
   }
+}
+
+export interface Ticket {
+  ticketId?: string;
+  sportName: string;
+  gmail: string;
+  phone: string;
+  username: string;
+  ticketType: string;
 }
