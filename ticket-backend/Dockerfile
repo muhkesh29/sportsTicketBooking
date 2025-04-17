@@ -15,10 +15,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Fix: Add destination filename
-COPY --from=build /app/target/group-project-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app/target/ticket-backend-0.0.1-SNAPSHOT.jar .
 
 # Expose the port that the Spring Boot app runs on
 EXPOSE 8080
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "/app/group-project-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/ticket-backend-0.0.1-SNAPSHOT.jar"]
